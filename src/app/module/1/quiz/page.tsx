@@ -76,9 +76,15 @@ export default function Quiz1() {
         setSelectedOpt(null);
       } else {
         setShowResult(true);
-        // Save progress if passed
-        if (newScore >= 8) {
-          // TODO: Call API to save progress
+        // Save progress to database
+        const userId = localStorage.getItem('userId');
+        const passed = newScore >= 8;
+        if (userId) {
+          fetch('/api/quiz/submit', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ userId, moduleId: 1, score: newScore, passed })
+          }).catch(err => console.error("Error saving progress:", err));
         }
       }
     }, 800); // Pequeña pausa para mostrar qué seleccionó
