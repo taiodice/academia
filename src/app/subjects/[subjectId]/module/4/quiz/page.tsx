@@ -1,27 +1,27 @@
 'use client';
 import { useState, useEffect } from 'react';
-import { useRouter } from 'next/navigation';
+import { useRouter, useParams } from 'next/navigation';
 
 const questions = [
   // Del Módulo 1 (Características de los seres vivos)
   {
-    q: '¿Qué diferencia a un ser vivo unicelular de uno pluricelular?',
-    options: ['El unicelular no tiene núcleo.', 'El unicelular tiene una sola célula, el pluricelular muchas.', 'Los unicelulares solo viven en el agua.', 'Los pluricelulares no necesitan comer.'],
+    q: '¿Qué es el ciclo de vida?',
+    options: ['Un círculo dibujado en el piso.', 'La etapa donde solo comemos.', 'El proceso inevitable de nacer, crecer, reproducirse y morir.', 'La reproducción sexual.'],
+    answer: 2
+  },
+  {
+    q: 'Si un ser vivo fabrica su propio alimento (como una planta), decimos que tiene una nutrición...',
+    options: ['Heterótrofa', 'Autótrofa', 'Sexual', 'Unicelular'],
     answer: 1
   },
   {
-    q: '¿Cuáles son las tres funciones vitales de todos los seres vivos?',
-    options: ['Comer, dormir y jugar', 'Nacer, crecer y morir', 'Nutrición, Relación y Reproducción', 'Respirar, caminar y pensar'],
+    q: '¿Cuál es la principal diferencia entre reproducción sexual y asexual?',
+    options: ['La asexual necesita dos padres y la sexual uno solo.', 'La sexual produce clones idénticos y la asexual diversidad genética.', 'La asexual involucra un solo individuo (clones) y la sexual a dos individuos (diversidad genética).', 'No hay diferencia.'],
     answer: 2
   },
   {
     q: '¿Cuál es la principal diferencia entre células eucariotas y procariotas?',
     options: ['Las procariotas son más grandes.', 'Las eucariotas tienen el ADN protegido en un núcleo verdadero.', 'Las eucariotas solo están en las plantas.', 'Las procariotas no tienen ADN.'],
-    answer: 1
-  },
-  {
-    q: '¿En qué etapa del ciclo de vida un ser vivo aumenta su tamaño?',
-    options: ['Nacimiento', 'Crecimiento', 'Reproducción', 'Muerte'],
     answer: 1
   },
   // Del Módulo 2 (Relación en plantas)
@@ -31,45 +31,47 @@ const questions = [
     answer: 1
   },
   {
-    q: 'Si pones una planta cerca de una ventana y se dobla hacia el sol, esto es un ejemplo de...',
-    options: ['Fototropismo', 'Hidrotropismo', 'Tigmotactismo', 'Fotosíntesis'],
+    q: 'Si pones una planta cerca de una ventana y el tallo crece doblándose hacia el sol, esto es un ejemplo de...',
+    options: ['Fototropismo positivo', 'Hidrotropismo', 'Tigmotactismo', 'Fotosíntesis oscura'],
     answer: 0
   },
   {
-    q: '¿Cómo sobreviven las plantas xerófitas en lugares secos?',
-    options: ['Tienen raíces muy cortas.', 'No necesitan agua nunca.', 'Tienen hojas grandes para sudar.', 'Acumulan agua en sus tallos y tienen hojas en forma de espinas.'],
-    answer: 3
+    q: '¿Qué adaptación tienen los cactus (xerófitas) para sobrevivir a la falta de agua y el calor?',
+    options: ['Tienen raíces cortas y hojas anchas.', 'Sundan todo el día.', 'Sus hojas se transformaron en espinas y guardan agua en el tallo grueso.', 'Pierden las hojas en otoño.'],
+    answer: 2
   },
   {
-    q: '¿Qué es una nastia?',
-    options: ['Un movimiento permanente de la planta.', 'Un movimiento pasajero, como cuando una planta carnívora se cierra.', 'El crecimiento de la raíz hacia el agua.', 'Una enfermedad de las plantas.'],
+    q: 'Cuando una planta carnívora se cierra velozmente al sentir que una mosca toca sus pelos, está realizando un movimiento de:',
+    options: ['Fototropismo', 'Tigmotactismo (una nastia por tacto)', 'Hidrotropismo negativo', 'Sismonastia pasiva'],
     answer: 1
   },
   // Del Módulo 3 (Relación en animales)
   {
-    q: '¿Qué es un animal ectotérmico?',
-    options: ['Que genera su propio calor corporal (como nosotros).', 'Que depende de la temperatura del ambiente (como las serpientes).', 'Que solo vive en el frío extremo.', 'Que no tiene sangre.'],
+    q: 'Para vivir bajo el agua, los peces evolucionaron aletas, forma hidrodinámica, vejiga natatoria y...',
+    options: ['Pulmones extra grandes.', 'Branquias para respirar el oxígeno del agua.', 'Branquias para respirar aire superficial.', 'Patas con aletas de buceo.'],
     answer: 1
   },
   {
-    q: '¿Cómo se llama la adaptación donde un animal duerme profundamente durante el invierno extremo?',
-    options: ['Estivación', 'Migración', 'Hibernación', 'Necton'],
+    q: 'Los mamíferos (como los lobos y tú) generan su propio calor interno. Por eso se llaman animales...',
+    options: ["Ectotérmicos", "Bentos", "Endotérmicos", "Fototrópicos"],
     answer: 2
   },
   {
-    q: 'Los peces que nadan activamente contra las corrientes pertenecen al grupo del...',
+    q: 'Los peces, delfines y tiburones, que nadan activamente y pelean contra las corrientes del mar, forman parte del grupo del...',
     options: ['Bentos', 'Plancton', 'Necton', 'Sedimento'],
     answer: 2
   },
   {
-    q: '¿Qué es la estivación?',
-    options: ['Es como la hibernación, pero los animales duermen para escapar del calor extremo o sequía.', 'Viajar miles de kilómetros en verano.', 'Comer mucho en primavera.', 'La forma en que los osos pasan el invierno.'],
+    q: 'Algunos animales se entierran en el lodo a dormir todo el verano para no morir secos por el intenso calor. Esto se llama...',
+    options: ['Estivación', 'Migración', 'Hibernación', 'Tigmotactismo'],
     answer: 0
   }
 ];
 
 export default function FinalExam() {
   const router = useRouter();
+  const params = useParams();
+  const subjectId = params.subjectId;
   const [currentQ, setCurrentQ] = useState(0);
   const [score, setScore] = useState(0);
   const [showResult, setShowResult] = useState(false);
@@ -103,7 +105,7 @@ export default function FinalExam() {
           fetch('/api/quiz/submit', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ userId, subjectId: 'biologia', moduleId: 4, score: newScore, passed })
+            body: JSON.stringify({ userId, subjectId, moduleId: 4, score: newScore, passed })
           }).catch(err => console.error("Error saving progress:", err));
         }
       }
@@ -124,9 +126,12 @@ export default function FinalExam() {
               ? '¡Felicidades, Franco! Has dominado todo el conocimiento de Biología 7. Eres oficialmente un maestro de los seres vivos.' 
               : 'El jefe final te ha derrotado. Necesitas al menos 10 aciertos para vencerlo. Repasa los módulos e inténtalo de nuevo.'}
           </p>
-          <button onClick={() => router.push('/subjects/biologia')} className="btn-primary" style={{ width: '100%' }}>
-            Volver a Biología
-          </button>
+          <div style={{ marginTop: '2rem', display: 'flex', gap: '1rem', justifyContent: 'center' }}>
+            {!passed && <button onClick={() => { setCurrentQ(0); setScore(0); setShowResult(false); setSelectedOpt(null); }} className="btn-primary">Reintentar</button>}
+            <button onClick={() => router.push(`/subjects/${subjectId}`)} className={passed ? "btn-primary" : "btn-secondary"} style={{ width: '100%' }}>
+              Volver a Biología
+            </button>
+          </div>
         </div>
       </div>
     );

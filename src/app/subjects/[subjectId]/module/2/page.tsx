@@ -20,44 +20,43 @@ export default function Module2() {
           La Función de Relación en las Plantas 🌻
         </h1>
         <p style={{ textAlign: 'center', color: 'var(--text-secondary)', fontSize: '1.2rem', marginBottom: '3rem' }}>
-          Spoiler alert: Las plantas no tienen cerebro, pero saben perfectamente lo que hacen.
+          Spoiler alert: Las plantas no tienen cerebro, pero saben perfectamente lo que pasa a su alrededor.
         </p>
 
         <section className="glass-card" style={{ padding: '2rem', marginBottom: '2rem' }}>
-          <h2>1. Adaptaciones al Agua 💧</h2>
+          <h2>1. Relación con la luz, temperatura y agua 🌦️</h2>
           <p style={{ marginTop: '1rem', lineHeight: '1.6' }}>
-            Las plantas no pueden correr a tomar agua, así que tienen que adaptarse al lugar donde nacen. Existen dos tipos extremos:
+            Las plantas no pueden correr a refugiarse, así que tienen que adaptarse físicamente al lugar donde nacen:
           </p>
           <ul style={{ marginTop: '1rem', paddingLeft: '1.5rem', lineHeight: '1.6' }}>
-            <li><strong style={{ color: '#3b82f6' }}>Hidrófitas:</strong> Viven en el agua o en lugares muy húmedos (como los nenúfares). Tienen raíces muy cortas (¡no necesitan buscar agua lejos!) y hojas anchas para flotar.</li>
-            <li><strong style={{ color: '#f59e0b' }}>Xerófitas:</strong> Las maestras de la supervivencia en el desierto (como los cactus). Tienen raíces larguísimas para buscar agua subterránea, acumulan agua en el tallo y sus hojas son espinas para evitar la pérdida de agua por evaporación.</li>
+            <li><strong>Luz y Temperatura:</strong> Las plantas ajustan su ciclo de vida al clima. En otoño, cuando baja la temperatura y hay menos horas de luz, muchos árboles pierden sus hojas para ahorrar energía en invierno. Otras germinan y florecen únicamente cuando detectan el aumento de temperatura en primavera.</li>
+            <li style={{ marginTop: '1rem' }}><strong style={{ color: '#3b82f6' }}>Hidrófitas (Relación con exceso de agua):</strong> Viven en el agua o pantanos (ej: nenúfares). Tienen raíces muy cortas porque no necesitan buscar agua, y hojas anchas para flotar.</li>
+            <li><strong style={{ color: '#f59e0b' }}>Xerófitas (Relación con falta de agua):</strong> Las maestras del desierto (ej: cactus). Tienen raíces larguísimas para buscar agua profunda, la acumulan en su tallo y sus hojas evolucionaron a espinas para evitar la evaporación por calor extremo.</li>
           </ul>
         </section>
 
         <section className="glass-card" style={{ padding: '2rem', marginBottom: '2rem' }}>
-          <h2>2. Los Movimientos de las Plantas 🕺</h2>
+          <h2>2. Movimientos como respuesta a estímulos 🕺</h2>
           <p style={{ marginTop: '1rem', lineHeight: '1.6' }}>
-            Aunque no lo parezca, las plantas se mueven. Lo hacen muy lento o como respuesta a estímulos rápidos.
+            Aunque parezcan quietas, las plantas se mueven de dos formas principales: Tropismos y Nastias.
           </p>
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem', marginTop: '1rem' }}>
-            <div style={{ background: 'rgba(255,255,255,0.05)', padding: '1rem', borderRadius: '10px' }}>
-              <h3 style={{ color: 'var(--accent-secondary)' }}>Tropismos 🌞</h3>
-              <p style={{ fontSize: '0.9rem', marginTop: '0.5rem' }}>Son movimientos de <strong>crecimiento permanente</strong> hacia (o alejándose de) un estímulo. Son muy lentos.</p>
-              <ul style={{ fontSize: '0.85rem', marginTop: '0.5rem', paddingLeft: '1rem' }}>
-                <li><strong>Fototropismo:</strong> Crecer buscando la luz (el tallo del girasol).</li>
-                <li><strong>Geotropismo:</strong> Crecer a favor de la gravedad (las raíces).</li>
-                <li><strong>Hidrotropismo:</strong> Las raíces buscando humedad.</li>
-              </ul>
-            </div>
-            <div style={{ background: 'rgba(255,255,255,0.05)', padding: '1rem', borderRadius: '10px' }}>
-              <h3 style={{ color: '#10b981' }}>Nastias 🌺</h3>
-              <p style={{ fontSize: '0.9rem', marginTop: '0.5rem' }}>Son movimientos <strong>pasajeros</strong> y rápidos, independientes de la dirección del estímulo.</p>
-              <ul style={{ fontSize: '0.85rem', marginTop: '0.5rem', paddingLeft: '1rem' }}>
-                <li><strong>Sismonastia:</strong> Cuando una planta carnívora se cierra rápidamente al tocarla.</li>
-                <li><strong>Fotonastia:</strong> Flores que se abren de día y se cierran de noche.</li>
-              </ul>
-            </div>
-          </div>
+
+          <h3 style={{ color: 'var(--accent-secondary)', marginTop: '1.5rem' }}>Tropismos 🌞</h3>
+          <p style={{ marginTop: '0.5rem', lineHeight: '1.6' }}>
+            Son movimientos de <strong>crecimiento permanente y lento</strong> hacia un estímulo (tropismo positivo) o alejándose de él (negativo).
+          </p>
+          <ul style={{ marginTop: '0.5rem', paddingLeft: '1.5rem', lineHeight: '1.6' }}>
+            <li><strong>Fototropismo:</strong> Crecimiento influenciado por la luz. El tallo de un girasol crece hacia el sol (fototropismo positivo).</li>
+            <li><strong>Hidrotropismo:</strong> Crecimiento influenciado por el agua. Las raíces crecen estirándose hacia donde hay zonas húmedas bajo la tierra.</li>
+          </ul>
+
+          <h3 style={{ color: '#10b981', marginTop: '1.5rem' }}>Nastias 🌺</h3>
+          <p style={{ marginTop: '0.5rem', lineHeight: '1.6' }}>
+            Son movimientos <strong>pasajeros, temporales y muy rápidos</strong>, y no importa de dónde venga el estímulo.
+          </p>
+          <ul style={{ marginTop: '0.5rem', paddingLeft: '1.5rem', lineHeight: '1.6' }}>
+            <li><strong>Tigmotactismo (o tigmonastia):</strong> Es la reacción rápida de una planta <strong>al tacto</strong>. Por ejemplo, cuando una planta carnívora se cierra velozmente al sentir que una mosca toca sus pelos sensitivos, o cuando las hojas de la <em>Mimosa pudica</em> se pliegan al tocarlas para protegerse.</li>
+          </ul>
         </section>
 
         <div style={{ textAlign: 'center', marginTop: '3rem' }}>

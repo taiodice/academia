@@ -20,46 +20,56 @@ export default function Module1() {
           Características de los seres vivos 👽
         </h1>
         <p style={{ textAlign: 'center', color: 'var(--text-secondary)', fontSize: '1.2rem', marginBottom: '3rem' }}>
-          Spoiler alert: Eres un montón de células colaborando para no morir.
+          Todo lo que está vivo en el planeta cumple reglas estrictas. ¡Conócelas!
         </p>
 
         <section className="glass-card" style={{ padding: '2rem', marginBottom: '2rem' }}>
-          <h2>1. ¿De qué estamos hechos? 🧱</h2>
+          <h2>1. ¿De qué están formados? 🧱</h2>
           <p style={{ marginTop: '1rem', lineHeight: '1.6' }}>
-            Imagina que estás jugando Minecraft. Todo está hecho de bloques, ¿verdad? Bueno, en la vida real, el bloque fundamental no es de tierra o diamante, es la <strong>célula</strong>.
+            Todo ser vivo está formado por células. Existen de dos tipos según su cantidad y complejidad:
           </p>
           <ul style={{ marginTop: '1rem', paddingLeft: '1.5rem', lineHeight: '1.6' }}>
-            <li><strong>Unicelulares:</strong> Son los lobos solitarios de la biología (como las bacterias). Una sola célula hace todo: come, se defiende y se reproduce. Básicamente, viven en modo Dios (pero chiquitos).</li>
-            <li><strong>Pluricelulares:</strong> Somos nosotros. Tenemos billones de células especializadas. Algunas forman tus músculos para que puedas correr, otras forman tus ojos para que leas esto. ¡Trabajo en equipo nivel leyenda!</li>
+            <li><strong>Unicelulares:</strong> Organismos formados por <em>una sola célula</em>. Son microscópicos (como las bacterias).</li>
+            <li><strong>Pluricelulares:</strong> Organismos formados por <em>muchas células</em> que trabajan en equipo (como tú, tu perro o un manzano).</li>
+            <li style={{ marginTop: '1rem' }}><strong>Células Procariotas:</strong> Células simples que NO tienen un núcleo definido. El ADN está suelto (Bacterias).</li>
+            <li><strong>Células Eucariotas:</strong> Células complejas que SÍ tienen un núcleo verdadero que protege su ADN (Animales, plantas, hongos).</li>
           </ul>
         </section>
 
         <section className="glass-card" style={{ padding: '2rem', marginBottom: '2rem' }}>
-          <h2>2. Eucariotas vs Procariotas ⚔️</h2>
+          <h2>2. El Ciclo de Vida 🔄</h2>
           <p style={{ marginTop: '1rem', lineHeight: '1.6' }}>
-            No todas las células son iguales. Hay dos equipos principales:
+            Nadie es eterno. Para ser considerado un ser vivo, debes atravesar un ciclo inevitable:
           </p>
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem', marginTop: '1rem' }}>
-            <div style={{ background: 'rgba(255,255,255,0.05)', padding: '1rem', borderRadius: '10px' }}>
-              <h3 style={{ color: 'var(--accent-secondary)' }}>Eucariotas (VIPs) 👑</h3>
-              <p style={{ fontSize: '0.9rem', marginTop: '0.5rem' }}>Tienen su material genético bien guardado en un núcleo. Son como casas con cuartos separados. Ej: Células de Animales y Plantas.</p>
-            </div>
-            <div style={{ background: 'rgba(255,255,255,0.05)', padding: '1rem', borderRadius: '10px' }}>
-              <h3 style={{ color: '#f59e0b' }}>Procariotas (Minimalistas) 🎒</h3>
-              <p style={{ fontSize: '0.9rem', marginTop: '0.5rem' }}>No tienen núcleo. Su ADN está suelto por ahí como los cables detrás de la compu. Ej: Bacterias.</p>
-            </div>
+          <div style={{ display: 'flex', justifyContent: 'center', gap: '1rem', marginTop: '1rem', flexWrap: 'wrap' }}>
+            <span style={{ padding: '10px 20px', background: 'rgba(255,255,255,0.1)', borderRadius: '20px' }}>👶 Nacer</span>
+            <span style={{ padding: '10px 20px', background: 'rgba(255,255,255,0.1)', borderRadius: '20px' }}>📈 Crecer</span>
+            <span style={{ padding: '10px 20px', background: 'rgba(255,255,255,0.1)', borderRadius: '20px' }}>🧬 Reproducirse</span>
+            <span style={{ padding: '10px 20px', background: 'rgba(255,255,255,0.1)', borderRadius: '20px' }}>💀 Morir</span>
           </div>
         </section>
 
         <section className="glass-card" style={{ padding: '2rem', marginBottom: '3rem' }}>
-          <h2>3. Las Funciones Vitales 🔄</h2>
+          <h2>3. Las Funciones Vitales ⚡</h2>
           <p style={{ marginTop: '1rem', lineHeight: '1.6' }}>
-            Para considerarte un "ser vivo" oficialmente y no una simple piedra muy inteligente, tienes que cumplir estas tres reglas básicas (sí, incluso tú):
+            Además del ciclo de vida, todos los seres vivos realizan estas tres funciones clave:
           </p>
-          <ul style={{ marginTop: '1rem', paddingLeft: '1.5rem', lineHeight: '1.6' }}>
-            <li>🍔 <strong>Nutrición:</strong> Obtener energía. Si eres planta haces fotosíntesis (autótrofos); si eres animal, vas a la heladera (heterótrofos).</li>
-            <li>👀 <strong>Relación:</strong> Darse cuenta de qué pasa alrededor y reaccionar. Si tocas algo caliente y quitas la mano, es función de relación. ¡Tu sistema nervioso en acción!</li>
-            <li>👶 <strong>Reproducción:</strong> Crear descendencia para que la especie no se extinga.</li>
+
+          <h3 style={{ color: 'var(--accent-primary)', marginTop: '1.5rem' }}>A) Nutrición 🍔</h3>
+          <ul style={{ marginTop: '0.5rem', paddingLeft: '1.5rem', lineHeight: '1.6' }}>
+            <li><strong>Autótrofa:</strong> Fabrican su propio alimento. Las plantas hacen esto mediante la fotosíntesis (auto = por sí mismo).</li>
+            <li><strong>Heterótrofa:</strong> Necesitan comer a otros seres vivos para obtener energía. (hetero = otro). Animales, humanos y hongos.</li>
+          </ul>
+
+          <h3 style={{ color: '#f59e0b', marginTop: '1.5rem' }}>B) Relación 👀</h3>
+          <p style={{ marginTop: '0.5rem', lineHeight: '1.6' }}>
+            Es la capacidad de <strong>captar estímulos</strong> del medio ambiente (luz, calor, peligro) y generar una respuesta. Por ejemplo: si tocas algo muy caliente, tu cuerpo capta el estímulo de dolor y la respuesta es quitar la mano rápido.
+          </p>
+
+          <h3 style={{ color: '#10b981', marginTop: '1.5rem' }}>C) Reproducción 👶</h3>
+          <ul style={{ marginTop: '0.5rem', paddingLeft: '1.5rem', lineHeight: '1.6' }}>
+            <li><strong>Asexuada (Asexual):</strong> Participa <em>un solo individuo</em>. La cría es un clon idéntico al padre (Ej: bacterias dividiéndose en dos).</li>
+            <li><strong>Sexuada (Sexual):</strong> Participan <em>dos individuos</em> de diferente sexo. La cría hereda características de ambos, lo que genera diversidad (Ej: humanos, leones).</li>
           </ul>
         </section>
 

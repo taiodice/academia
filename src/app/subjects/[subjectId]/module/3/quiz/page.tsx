@@ -4,54 +4,54 @@ import { useRouter, useParams } from 'next/navigation';
 
 const questions = [
   {
-    q: "¿Qué significa ser un animal endotérmico?",
-    options: ["Que su cuerpo siempre está frío", "Que genera su propio calor corporal quemando energía", "Que su temperatura depende exclusivamente del sol", "Que vive debajo de la tierra"],
+    q: "¿Qué órgano utilizan los peces para extraer el oxígeno disuelto en el agua y poder respirar?",
+    options: ["Los pulmones", "Las branquias", "La vejiga natatoria", "Las aletas dorsales"],
     correct: 1
   },
   {
-    q: "Una lagartija tomando sol sobre una piedra caliente es un ejemplo claro de un animal...",
-    options: ["Endotérmico", "Ectotérmico", "Unicelular", "Mamífero"],
-    correct: 1
-  },
-  {
-    q: "¿Qué estrategia usan los osos para sobrevivir al intenso frío y falta de comida en invierno?",
-    options: ["Migración", "Estivación", "Hibernación", "Necton"],
+    q: "¿Para qué sirve la vejiga natatoria en los peces?",
+    options: ["Para almacenar agua potable", "Para digerir alimentos rápidos", "Es como un globo de gas que les permite flotar y cambiar de profundidad sin esfuerzo", "Para respirar aire fuera del agua"],
     correct: 2
   },
   {
-    q: "Si un animal se entierra en el lodo para dormir y escapar de una extrema sequía de verano, está haciendo:",
-    options: ["Estivación", "Fototropismo", "Hibernación", "Migración"],
+    q: "Los organismos diminutos del mar que NO pueden nadar y simplemente flotan a la deriva son el:",
+    options: ["Plancton", "Bentos", "Necton", "Ectotermo"],
     correct: 0
   },
   {
-    q: "Las aves que vuelan miles de kilómetros hacia el sur buscando calor antes de que llegue el invierno realizan una:",
-    options: ["Nastia", "Estivación", "Hibernación", "Migración"],
-    correct: 3
+    q: "Los cangrejos y estrellas de mar viven caminando en el fondo del mar. Ellos pertenecen al grupo del...",
+    options: ["Plancton", "Necton", "Bentos", "Endotérmico"],
+    correct: 2
   },
   {
-    q: "En los ecosistemas acuáticos, los cangrejos y estrellas de mar que viven arrastrándose en el fondo pertenecen al:",
-    options: ["Plancton", "Bentos", "Necton", "Xerófitas"],
-    correct: 1
+    q: "¿Por qué los animales ectotérmicos (como lagartijas y serpientes) se acuestan sobre rocas calientes?",
+    options: ["Porque están cansados de cazar", "Porque generan su propio calor interno y quieren broncearse", "Porque su temperatura depende del ambiente, y necesitan el calor del sol para calentar sus músculos y activarse", "Para realizar fotosíntesis"],
+    correct: 2
   },
   {
-    q: "Los diminutos organismos que son arrastrados pasivamente por las corrientes marinas son el:",
-    options: ["Plancton", "Necton", "Bentos", "Bacterias terrestres"],
+    q: "Los mamíferos (como los lobos o los humanos) y las aves generan su propio calor corporal. Por lo tanto, son animales:",
+    options: ["Ectotérmicos", "Bentos", "Endotérmicos", "Autótrofos"],
+    correct: 2
+  },
+  {
+    q: "¿Qué nombre recibe el largo viaje que hacen las aves cada año para escapar del crudo invierno?",
+    options: ["Hibernación", "Estivación", "Migración", "Tigmotactismo"],
+    correct: 2
+  },
+  {
+    q: "Cuando un oso se encierra a dormir todo el invierno bajando su ritmo cardíaco para no gastar energía, está en estado de...",
+    options: ["Hibernación", "Estivación", "Necton profundo", "Migración estática"],
     correct: 0
   },
   {
-    q: "Un tiburón nadando velozmente contra las corrientes del océano es parte del:",
-    options: ["Bentos", "Necton", "Plancton", "Ectotérmico sedentario"],
-    correct: 1
-  },
-  {
-    q: "Nosotros los humanos, ¿somos endotérmicos o ectotérmicos?",
-    options: ["Endotérmicos", "Ectotérmicos", "Ambos", "Ninguno, somos plantas"],
+    q: "Algunos sapos se entierran en el barro para dormir y escapar de las mortalmente calurosas y secas épocas de verano. Esto se llama:",
+    options: ["Estivación", "Hibernación de calor", "Migración subterránea", "Fototropismo animal"],
     correct: 0
   },
   {
-    q: "¿Por qué los animales de sangre fría (ectotérmicos) son menos activos cuando hace frío?",
-    options: ["Porque les da sueño crónico", "Porque sus músculos y metabolismo se congelan y ralentizan al no poder generar calor interno", "Porque usan ese tiempo para comer", "Porque están en estivación profunda"],
-    correct: 1
+    q: "¿Qué grupo de animales acuáticos tiene aletas y músculos fuertes que les permiten nadar activamente a donde quieran (como tiburones o delfines)?",
+    options: ["Bentos", "Plancton", "Necton", "Anfibios estivales"],
+    correct: 2
   }
 ];
 

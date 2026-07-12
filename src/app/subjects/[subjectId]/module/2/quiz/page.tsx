@@ -4,54 +4,54 @@ import { useRouter, useParams } from 'next/navigation';
 
 const questions = [
   {
-    q: "Las plantas hidrófitas se caracterizan por...",
-    options: ["Tener hojas en forma de espina", "Vivir en desiertos", "Tener raíces cortas y vivir en lugares muy húmedos", "No necesitar agua"],
+    q: "¿Cómo reaccionan muchos árboles al percibir que bajan la temperatura y las horas de luz en otoño?",
+    options: ["Germinan semillas", "Pierden sus hojas para ahorrar energía", "Se convierten en hidrófitas", "Realizan fototropismo negativo"],
+    correct: 1
+  },
+  {
+    q: "Las plantas hidrófitas están adaptadas al agua y se caracterizan por...",
+    options: ["Tener hojas en forma de espina", "Vivir en desiertos", "Tener raíces cortas y hojas anchas para flotar", "No necesitar agua"],
     correct: 2
   },
   {
-    q: "Si una planta cambia sus hojas por espinas y guarda agua en el tallo, es una...",
-    options: ["Hidrófita", "Xerófita", "Carnívora", "Eucariota"],
+    q: "Los cactus son plantas xerófitas. ¿Qué adaptación tienen para sobrevivir al calor y la falta de agua?",
+    options: ["Tienen raíces cortas", "Pierden sus hojas en otoño", "Tienen hojas anchas para flotar", "Transformaron sus hojas en espinas y acumulan agua en el tallo"],
+    correct: 3
+  },
+  {
+    q: "Un movimiento vegetal de crecimiento lento y permanente hacia (o en contra de) un estímulo se llama:",
+    options: ["Nastia", "Tropismo", "Tigmotactismo", "Fotosíntesis"],
     correct: 1
   },
   {
-    q: "Los cactus son el mejor ejemplo de plantas:",
-    options: ["Xerófitas", "Hidrófitas", "Acuáticas", "Fototrópicas"],
-    correct: 0
-  },
-  {
-    q: "¿Qué es un tropismo?",
-    options: ["Un movimiento pasajero y rápido", "Un salto de la planta", "Un movimiento de crecimiento lento y permanente hacia un estímulo", "Una enfermedad de las raíces"],
-    correct: 2
-  },
-  {
-    q: "Cuando el tallo de una planta crece dirigiéndose hacia la ventana buscando el sol, está haciendo:",
-    options: ["Geotropismo positivo", "Fototropismo positivo", "Sismonastia", "Fotosíntesis oscura"],
+    q: "Cuando el tallo de una planta crece curvándose hacia la ventana buscando el sol, está haciendo:",
+    options: ["Hidrotropismo negativo", "Fototropismo positivo", "Tigmotactismo", "Fotonastia"],
     correct: 1
   },
   {
-    q: "Las raíces que crecen hacia abajo a favor de la gravedad muestran un:",
-    options: ["Fototropismo negativo", "Geotropismo positivo", "Geotropismo negativo", "Tropismo de gravedad nula"],
+    q: "Las raíces de los árboles que se desvían bajo tierra para crecer hacia una tubería húmeda están haciendo:",
+    options: ["Geotropismo", "Hidrotropismo", "Fototropismo", "Tigmotactismo"],
     correct: 1
-  },
-  {
-    q: "Las plantas carnívoras que cierran su trampa velozmente al sentir una mosca realizan una:",
-    options: ["Sismonastia", "Fototropismo", "Hidrotropismo", "Geonastia"],
-    correct: 0
   },
   {
     q: "A diferencia de un tropismo, una nastia es...",
-    options: ["Permanente", "Solo en raíces", "Un movimiento rápido y temporal", "Solo por el agua"],
+    options: ["Un movimiento de crecimiento lento", "Solo posible en cactus", "Un movimiento rápido y temporal que no depende de la dirección del estímulo", "Una adaptación a la falta de agua"],
     correct: 2
   },
   {
-    q: "Las raíces de los árboles que se desvían para crecer hacia una tubería de agua están haciendo:",
-    options: ["Geotropismo", "Fotonastia", "Hidrotropismo", "Fototropismo"],
-    correct: 2
-  },
-  {
-    q: "Las margaritas que se abren de día y se cierran de noche realizan un movimiento llamado:",
-    options: ["Fotonastia", "Sismonastia", "Fototropismo", "Tropismo nocturno"],
+    q: "Las plantas carnívoras que cierran su trampa velozmente al sentir el tacto de una mosca realizan un movimiento llamado:",
+    options: ["Tigmotactismo", "Fototropismo", "Hidrotropismo", "Geonastia"],
     correct: 0
+  },
+  {
+    q: "La Mimosa pudica, una planta que encoge y pliega sus hojas inmediatamente cuando la tocas, es un ejemplo claro de:",
+    options: ["Tigmotactismo", "Hidrotropismo", "Fototropismo", "Xerófita"],
+    correct: 0
+  },
+  {
+    q: "En general, la función de relación en las plantas les permite:",
+    options: ["Generar animales", "Solo captar la luz solar", "Captar los cambios del ambiente (luz, agua, temperatura, tacto) y adaptarse a ellos para sobrevivir", "Evitar la reproducción"],
+    correct: 2
   }
 ];
 

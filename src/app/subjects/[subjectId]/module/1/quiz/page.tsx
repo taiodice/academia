@@ -4,54 +4,54 @@ import { useRouter, useParams } from 'next/navigation';
 
 const questions = [
   {
-    q: "¿Cuál es el bloque fundamental de la vida?",
-    options: ["El átomo", "La célula", "La piel", "El ADN"],
+    q: "¿Cuál es la diferencia principal entre un organismo unicelular y uno pluricelular?",
+    options: ["El unicelular tiene núcleo, el pluricelular no", "El unicelular está formado por una sola célula, el pluricelular por muchas", "El unicelular es un animal, el pluricelular es una planta", "No hay diferencia"],
     correct: 1
   },
   {
-    q: "Los organismos formados por una sola célula se llaman...",
-    options: ["Pluricelulares", "Extraterrestres", "Unicelulares", "Bacterianos"],
+    q: "Las células que NO tienen un núcleo definido y tienen su ADN suelto se llaman:",
+    options: ["Eucariotas", "Pluricelulares", "Procariotas", "Autótrofas"],
     correct: 2
   },
   {
-    q: "Un ejemplo clásico de organismo unicelular es:",
-    options: ["Un perro", "Una bacteria", "Un árbol", "Un humano"],
+    q: "¿Cuáles son las etapas del Ciclo de Vida que todo ser vivo debe cumplir?",
+    options: ["Comer, dormir y jugar", "Nacer, crecer, reproducirse y morir", "Nacer, cazar y dormir", "Nutrición, relación y reproducción"],
     correct: 1
   },
   {
-    q: "Las células VIP que tienen su ADN guardado en un núcleo son las:",
-    options: ["Eucariotas", "Procariotas", "Bacterias", "Invisibles"],
+    q: "Si una planta fabrica su propio alimento mediante la fotosíntesis, decimos que tiene una nutrición:",
+    options: ["Autótrofa", "Heterótrofa", "Asexual", "Pluricelular"],
     correct: 0
   },
   {
-    q: "Nosotros los humanos somos organismos...",
-    options: ["Unicelulares y Procariotas", "Pluricelulares y Procariotas", "Unicelulares y Eucariotas", "Pluricelulares y Eucariotas"],
-    correct: 3
-  },
-  {
-    q: "¿Qué función vital nos permite obtener energía de la heladera?",
-    options: ["Nutrición", "Relación", "Reproducción", "Sueño"],
-    correct: 0
-  },
-  {
-    q: "Las plantas hacen fotosíntesis, por lo tanto son organismos:",
-    options: ["Heterótrofos", "Autótrofos", "Carnívoros", "Aburridos"],
-    correct: 1
-  },
-  {
-    q: "Si tocas la estufa caliente y quitas la mano rápido, estás usando la función de:",
-    options: ["Nutrición", "Reproducción", "Magia", "Relación"],
-    correct: 3
-  },
-  {
-    q: "Las bacterias (nuestras amigas minimalistas) pertenecen al grupo de las células:",
-    options: ["Procariotas", "Eucariotas", "Vegetales", "Animales"],
-    correct: 0
-  },
-  {
-    q: "La función vital encargada de crear descendencia (o sea, más Franco's) es:",
-    options: ["Relación", "Nutrición", "Reproducción", "Clonación"],
+    q: "Los animales como los leones, que necesitan cazar a otros para obtener energía, tienen nutrición:",
+    options: ["Autótrofa", "Eucariota", "Heterótrofa", "Sexual"],
     correct: 2
+  },
+  {
+    q: "La función de Relación consiste principalmente en:",
+    options: ["Hacer nuevos amigos en el ecosistema", "Captar estímulos del medio ambiente y generar respuestas", "Digerir los alimentos", "Crear copias idénticas de uno mismo"],
+    correct: 1
+  },
+  {
+    q: "¿Qué tipo de reproducción involucra a dos individuos (macho y hembra) y genera crías con características de ambos?",
+    options: ["Reproducción Asexual", "Reproducción por clones", "Nutrición Autótrofa", "Reproducción Sexual (Sexuada)"],
+    correct: 3
+  },
+  {
+    q: "En la reproducción asexual (asexuada)...",
+    options: ["Se necesitan dos padres", "Participa un solo individuo y sus crías son clones idénticos a él", "Solo ocurre en los seres humanos", "Se producen huevos"],
+    correct: 1
+  },
+  {
+    q: "Las bacterias son un excelente ejemplo de organismos:",
+    options: ["Unicelulares y procariotas", "Pluricelulares y eucariotas", "Heterótrofos y sexuales", "Unicelulares y eucariotas"],
+    correct: 0
+  },
+  {
+    q: "¿Qué función vital está ocurriendo si tu cuerpo comienza a sudar porque captó el estímulo del calor extremo?",
+    options: ["Nutrición", "Reproducción", "Crecimiento", "Relación"],
+    correct: 3
   }
 ];
 
@@ -78,7 +78,6 @@ export default function Quiz1() {
         setSelectedOpt(null);
       } else {
         setShowResult(true);
-        // Save progress to database
         const userId = localStorage.getItem('userId');
         const passed = newScore >= 8;
         if (userId) {
@@ -89,7 +88,7 @@ export default function Quiz1() {
           }).catch(err => console.error("Error saving progress:", err));
         }
       }
-    }, 800); // Pequeña pausa para mostrar qué seleccionó
+    }, 800);
   };
 
   if (showResult) {
@@ -137,10 +136,10 @@ export default function Quiz1() {
 
               if (selectedOpt !== null) {
                 if (isCorrect) {
-                  bg = 'rgba(16, 185, 129, 0.2)'; // Verde
+                  bg = 'rgba(16, 185, 129, 0.2)'; 
                   border = '1px solid #10b981';
                 } else if (isWrong) {
-                  bg = 'rgba(239, 68, 68, 0.2)'; // Rojo
+                  bg = 'rgba(239, 68, 68, 0.2)'; 
                   border = '1px solid #ef4444';
                 }
               }
