@@ -24,18 +24,20 @@ model Progress {
   id        String   @id @default(uuid())
   userId    String
   user      User     @relation(fields: [userId], references: [id])
+  subjectId String   @default("biologia")
   moduleId  Int
   score     Int      @default(0)
   passed    Boolean  @default(false)
   createdAt DateTime @default(now())
 
-  @@unique([userId, moduleId])
+  @@unique([userId, subjectId, moduleId])
 }
 
 model QuizAttempt {
   id        String   @id @default(uuid())
   userId    String
   user      User     @relation(fields: [userId], references: [id])
+  subjectId String   @default("biologia")
   moduleId  Int
   score     Int
   passed    Boolean

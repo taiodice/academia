@@ -3,9 +3,9 @@ import { prisma } from '@/lib/prisma';
 
 export async function POST(req: Request) {
   try {
-    const { userId, moduleId, score, passed } = await req.json();
+    const { userId, subjectId, moduleId, score, passed } = await req.json();
 
-    if (!userId || moduleId === undefined || score === undefined) {
+    if (!userId || moduleId === undefined || score === undefined || !subjectId) {
       return NextResponse.json({ error: 'Faltan datos' }, { status: 400 });
     }
 
@@ -13,6 +13,7 @@ export async function POST(req: Request) {
     await prisma.quizAttempt.create({
       data: {
         userId,
+        subjectId,
         moduleId,
         score,
         passed,
@@ -23,8 +24,9 @@ export async function POST(req: Request) {
     if (passed) {
       await prisma.progress.upsert({
         where: {
-          userId_moduleId: {
+          userId_subjectId_moduleId: {
             userId,
+            subjectId,
             moduleId,
           },
         },
@@ -34,6 +36,7 @@ export async function POST(req: Request) {
         },
         create: {
           userId,
+          subjectId,
           moduleId,
           score,
           passed: true,

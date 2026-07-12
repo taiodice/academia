@@ -2,29 +2,31 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 
-export default function Dashboard() {
+export default function GlobalDashboard() {
   const router = useRouter();
   const [isLoaded, setIsLoaded] = useState(false);
+  const [userName, setUserName] = useState('');
 
   useEffect(() => {
     const userId = localStorage.getItem('userId');
+    const name = localStorage.getItem('userName');
     if (!userId) {
       router.push('/');
     } else {
+      setUserName(name || 'Estudiante');
       setIsLoaded(true);
     }
   }, [router]);
 
-  if (!isLoaded) return <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>Cargando laboratorio... 🔬</div>;
+  if (!isLoaded) return <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>Cargando materias... 📚</div>;
 
   return (
     <div className="container animate-fade-in">
       <header style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '2rem 0', borderBottom: '1px solid var(--glass-border)' }}>
-        <h2>🔬 BioAcademy</h2>
+        <div>
+          <h2 style={{ color: 'var(--accent-primary)' }}>🎓 Mi Academia</h2>
+        </div>
         <div style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
-          <span style={{ background: 'rgba(16, 185, 129, 0.2)', padding: '5px 15px', borderRadius: '20px', color: 'var(--accent-primary)', fontWeight: 'bold' }}>
-            🏆 0 XP
-          </span>
           <button onClick={() => { localStorage.removeItem('userId'); router.push('/'); }} className="btn-secondary" style={{ padding: '5px 15px', fontSize: '0.8rem' }}>
             Desconectarse
           </button>
@@ -32,38 +34,33 @@ export default function Dashboard() {
       </header>
 
       <main className="main-content">
-        <h1 style={{ marginBottom: '0.5rem' }}>¡Bienvenido al Laboratorio! 🧬</h1>
+        <h1 style={{ marginBottom: '0.5rem' }}>Hola, {userName}! 👋</h1>
         <p style={{ color: 'var(--text-secondary)', marginBottom: '3rem', fontSize: '1.1rem' }}>
-          Tu misión de hoy: Aprobar Biología 7. ¡Vamos a investigar la vida!
+          ¿Qué materia vamos a destruir hoy?
         </p>
         
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '2rem' }}>
           
+          <div className="glass-card" style={{ padding: '2rem', border: '1px solid rgba(16, 185, 129, 0.3)' }}>
+            <div style={{ fontSize: '3rem', marginBottom: '1rem' }}>🧬</div>
+            <h2 style={{ fontSize: '1.4rem' }}>Biología 7</h2>
+            <p style={{ color: 'var(--text-secondary)', marginTop: '1rem', marginBottom: '2rem', minHeight: '60px' }}>
+              Seres vivos, plantas, animales y adaptación. Tu misión principal.
+            </p>
+            <button onClick={() => router.push('/subjects/biologia')} className="btn-primary" style={{ width: '100%' }}>
+              Entrar al Laboratorio 🚀
+            </button>
+          </div>
+
           <div className="glass-card" style={{ padding: '2rem' }}>
-            <h3 style={{ color: 'var(--accent-primary)', marginBottom: '0.5rem' }}>MÓDULO 1</h3>
-            <h2 style={{ fontSize: '1.4rem' }}>Características de los seres vivos</h2>
+            <div style={{ fontSize: '3rem', marginBottom: '1rem' }}>🏛️</div>
+            <h2 style={{ fontSize: '1.4rem' }}>Historia</h2>
             <p style={{ color: 'var(--text-secondary)', marginTop: '1rem', marginBottom: '2rem', minHeight: '60px' }}>
-              Descubre de qué estamos hechos, unicelulares vs pluricelulares, eucariotas y las funciones vitales.
+              Explora los eventos que forjaron la humanidad. (Próximamente).
             </p>
-            <button onClick={() => router.push('/module/1')} className="btn-primary" style={{ width: '100%' }}>Comenzar Misión 🚀</button>
-          </div>
-
-          <div className="glass-card" style={{ padding: '2rem', opacity: 0.6 }}>
-            <h3 style={{ color: 'var(--text-secondary)', marginBottom: '0.5rem' }}>MÓDULO 2 🔒</h3>
-            <h2 style={{ fontSize: '1.4rem' }}>Función de relación en plantas</h2>
-            <p style={{ color: 'var(--text-secondary)', marginTop: '1rem', marginBottom: '2rem', minHeight: '60px' }}>
-              ¿Las plantas se mueven? Aprende sobre hidrófitas, xerófitas, tropismos y nastias.
-            </p>
-            <button className="btn-primary" style={{ width: '100%' }} disabled>Requiere Módulo 1</button>
-          </div>
-
-          <div className="glass-card" style={{ padding: '2rem', opacity: 0.6 }}>
-            <h3 style={{ color: 'var(--text-secondary)', marginBottom: '0.5rem' }}>MÓDULO 3 🔒</h3>
-            <h2 style={{ fontSize: '1.4rem' }}>Función de relación en animales</h2>
-            <p style={{ color: 'var(--text-secondary)', marginTop: '1rem', marginBottom: '2rem', minHeight: '60px' }}>
-              Adaptaciones extremas: Peces, plancton, endo/ectotérmicos, hibernación y migraciones.
-            </p>
-            <button className="btn-primary" style={{ width: '100%' }} disabled>Requiere Módulo 2</button>
+            <button onClick={() => router.push('/subjects/historia')} className="btn-secondary" style={{ width: '100%' }}>
+              Ver Temario
+            </button>
           </div>
 
         </div>

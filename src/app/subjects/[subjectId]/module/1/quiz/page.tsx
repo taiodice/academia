@@ -83,7 +83,7 @@ export default function Quiz1() {
           fetch('/api/quiz/submit', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ userId, moduleId: 1, score: newScore, passed })
+            body: JSON.stringify({ userId, subjectId: 'biologia', moduleId: 1, score: newScore, passed })
           }).catch(err => console.error("Error saving progress:", err));
         }
       }
