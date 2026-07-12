@@ -121,11 +121,11 @@ export default function SubjectDashboard({ params }: { params: Promise<{ subject
               </div>
 
               {/* Examen Final */}
-              <div className="glass-card" style={{ padding: '2rem', border: '2px solid rgba(239, 68, 68, 0.3)', opacity: passedModule3 ? 1 : 0.6 }}>
-                <h3 style={{ color: '#ef4444', marginBottom: '0.5rem' }}>JEFE FINAL 👾 {!passedModule3 && '🔒'}</h3>
-                <h2 style={{ fontSize: '1.4rem' }}>Examen Final: Biología 7</h2>
+              <div className="glass-card" style={{ padding: '2rem', border: '2px solid rgba(239, 68, 68, 0.3)', opacity: 1 }}>
+                <h3 style={{ color: '#ef4444', marginBottom: '0.5rem' }}>JEFE FINAL 👾</h3>
+                <h2 style={{ fontSize: '1.4rem' }}>Posibles Preguntas del Parcial</h2>
                 <p style={{ color: 'var(--text-secondary)', marginTop: '1rem', marginBottom: '2rem', minHeight: '60px' }}>
-                  Demuestra todo lo que has aprendido. 12 preguntas de los 3 módulos. ¡El desafío definitivo!
+                  Simulacro definitivo con 15 preguntas clave. ¡El desafío definitivo!
                 </p>
                 <button 
                   onClick={() => router.push(`/subjects/${subjectId}/module/4/quiz`)} 
