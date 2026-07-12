@@ -20,7 +20,12 @@ export async function GET(req: Request) {
       }
     });
 
-    return NextResponse.json({ success: true, progress });
+    const user = await prisma.user.findUnique({
+      where: { id: userId },
+      select: { score: true }
+    });
+
+    return NextResponse.json({ success: true, progress, userScore: user?.score || 0 });
   } catch (error) {
     console.error('Progress Error:', error);
     return NextResponse.json({ error: 'Error al obtener progreso' }, { status: 500 });

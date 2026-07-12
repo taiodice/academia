@@ -7,6 +7,7 @@ export default function SubjectDashboard({ params }: { params: Promise<{ subject
   const router = useRouter();
   const [isLoaded, setIsLoaded] = useState(false);
   const [progress, setProgress] = useState<any[]>([]);
+  const [userScore, setUserScore] = useState(0);
   const resolvedParams = use(params);
   const subjectId = resolvedParams.subjectId;
 
@@ -23,6 +24,7 @@ export default function SubjectDashboard({ params }: { params: Promise<{ subject
       .then(data => {
         if (data.success) {
           setProgress(data.progress);
+          if (data.userScore) setUserScore(data.userScore);
         }
         setIsLoaded(true);
       })
@@ -52,6 +54,9 @@ export default function SubjectDashboard({ params }: { params: Promise<{ subject
           <h2>{isBiologia ? '🔬 TucuAcademy' : '🏛️ Historia'}</h2>
         </div>
         <div style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
+          <div style={{ background: 'rgba(255, 215, 0, 0.2)', border: '1px solid gold', padding: '5px 15px', borderRadius: '20px', color: 'gold', fontWeight: 'bold' }}>
+            {userScore} XP ⭐
+          </div>
           <button onClick={() => { localStorage.removeItem('userId'); router.push('/'); }} className="btn-secondary" style={{ padding: '5px 15px', fontSize: '0.8rem' }}>
             Desconectarse
           </button>

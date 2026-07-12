@@ -20,33 +20,36 @@ export async function POST(req: Request) {
       },
     });
 
-    // 2. Si pasó el quiz, actualizar el progreso general
-    if (passed) {
+    // 2. Revisar si ya había aprobado antes
+    const previousProgress = await prisma.progress.findUnique({
+      where: {
+        userId_subjectId_moduleId: { userId, subjectId, moduleId }
+      }
+    });
+
+    const isFirstTimePass = passed && (!previousProgress || !previousProgress.passed);
+
+    // 3. Actualizar el progreso general (mejor puntaje histórico)
+    if (passed || (previousProgress && score > previousProgress.score)) {
       await prisma.progress.upsert({
         where: {
-          userId_subjectId_moduleId: {
-            userId,
-            subjectId,
-            moduleId,
-          },
+          userId_subjectId_moduleId: { userId, subjectId, moduleId },
         },
         update: {
-          score,
-          passed: true,
+          score: Math.max(score, previousProgress?.score || 0),
+          passed: passed || previousProgress?.passed || false,
         },
         create: {
-          userId,
-          subjectId,
-          moduleId,
-          score,
-          passed: true,
+          userId, subjectId, moduleId, score, passed
         },
       });
-      
-      // Bonus: Dar puntos al usuario
+    }
+
+    // 4. Bonus: Dar puntos al usuario SOLO la primera vez que aprueba
+    if (isFirstTimePass) {
       await prisma.user.update({
         where: { id: userId },
-        data: { score: { increment: 100 } } // 100 XP por pasar un módulo
+        data: { score: { increment: 100 } }
       });
     }
 
