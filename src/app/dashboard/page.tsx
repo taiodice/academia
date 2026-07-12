@@ -13,7 +13,7 @@ export default function GlobalDashboard() {
     if (!userId) {
       router.push('/');
     } else {
-      setUserName(name || 'Estudiante');
+      setUserName(name || 'Franco');
       setIsLoaded(true);
     }
   }, [router]);
@@ -43,7 +43,7 @@ export default function GlobalDashboard() {
           
           <div className="glass-card" style={{ padding: '2rem', border: '1px solid rgba(16, 185, 129, 0.3)' }}>
             <div style={{ fontSize: '3rem', marginBottom: '1rem' }}>🧬</div>
-            <h2 style={{ fontSize: '1.4rem' }}>Biología 7</h2>
+            <h2 style={{ fontSize: '1.4rem' }}>Biología</h2>
             <p style={{ color: 'var(--text-secondary)', marginTop: '1rem', marginBottom: '2rem', minHeight: '60px' }}>
               Seres vivos, plantas, animales y adaptación. Tu misión principal.
             </p>

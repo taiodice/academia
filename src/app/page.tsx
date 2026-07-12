@@ -23,6 +23,7 @@ export default function Home() {
         const data = await res.json();
         // Guardamos el ID del usuario en localStorage para la sesión
         localStorage.setItem('userId', data.user.id);
+        if (data.user.name) localStorage.setItem('userName', data.user.name);
         router.push('/dashboard');
       } else {
         alert('Error: Revisa tus credenciales.');
