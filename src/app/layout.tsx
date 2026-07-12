@@ -13,7 +13,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "BioAcademy - Estudia Biología",
+  title: "TucuAcademy - Estudia Biología",
   description: "Aprende características de los seres vivos y gamifica tu estudio.",
 };
 

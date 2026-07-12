@@ -29,7 +29,7 @@ export default function SubjectDashboard({ params }: { params: Promise<{ subject
           <button onClick={() => router.push('/dashboard')} className="btn-secondary" style={{ padding: '5px 15px', fontSize: '0.9rem' }}>
             ⬅ Volver a Materias
           </button>
-          <h2>{isBiologia ? '🔬 BioAcademy' : '🏛️ Historia'}</h2>
+          <h2>{isBiologia ? '🔬 TucuAcademy' : '🏛️ Historia'}</h2>
         </div>
         <div style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
           <button onClick={() => { localStorage.removeItem('userId'); router.push('/'); }} className="btn-secondary" style={{ padding: '5px 15px', fontSize: '0.8rem' }}>

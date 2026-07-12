@@ -35,7 +35,7 @@ export default function Home() {
   return (
     <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '100vh', width: '100%' }}>
       <div className="glass-card animate-fade-in" style={{ padding: '3rem', maxWidth: '400px', width: '100%', textAlign: 'center' }}>
-        <h1 style={{ marginBottom: '0.5rem', fontSize: '2rem' }}>🔬 BioAcademy</h1>
+        <h1 style={{ marginBottom: '0.5rem', fontSize: '2rem' }}>🔬 TucuAcademy</h1>
         <p style={{ color: 'var(--text-secondary)', marginBottom: '2rem' }}>
           La ciencia nunca fue tan divertida.
         </p>
