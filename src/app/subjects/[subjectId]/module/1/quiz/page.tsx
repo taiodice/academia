@@ -1,6 +1,6 @@
 'use client';
 import { useState } from 'react';
-import { useRouter } from 'next/navigation';
+import { useRouter, useParams } from 'next/navigation';
 
 const questions = [
   {
@@ -57,6 +57,8 @@ const questions = [
 
 export default function Quiz1() {
   const router = useRouter();
+  const params = useParams();
+  const subjectId = params.subjectId;
   const [currentQ, setCurrentQ] = useState(0);
   const [score, setScore] = useState(0);
   const [showResult, setShowResult] = useState(false);
@@ -102,7 +104,7 @@ export default function Quiz1() {
           </p>
           <div style={{ marginTop: '2rem', display: 'flex', gap: '1rem', justifyContent: 'center' }}>
             {!passed && <button onClick={() => { setCurrentQ(0); setScore(0); setShowResult(false); setSelectedOpt(null); }} className="btn-primary">Reintentar</button>}
-            <button onClick={() => router.push('/dashboard')} className={passed ? "btn-primary" : "btn-secondary"}>
+            <button onClick={() => router.push(`/subjects/${subjectId}`)} className={passed ? "btn-primary" : "btn-secondary"}>
               Volver al Laboratorio
             </button>
           </div>

@@ -1,13 +1,15 @@
 'use client';
-import { useRouter } from 'next/navigation';
+import { useRouter, useParams } from 'next/navigation';
 
 export default function Module1() {
   const router = useRouter();
+  const params = useParams();
+  const subjectId = params.subjectId;
 
   return (
     <div className="container animate-fade-in" style={{ paddingBottom: '4rem' }}>
       <header style={{ padding: '2rem 0', display: 'flex', alignItems: 'center', gap: '1rem' }}>
-        <button onClick={() => router.push('/dashboard')} className="btn-secondary">
+        <button onClick={() => router.push(`/subjects/${subjectId}`)} className="btn-secondary">
           ⬅ Volver al Laboratorio
         </button>
         <h2 style={{ color: 'var(--accent-primary)' }}>Misión 1</h2>
@@ -66,7 +68,7 @@ export default function Module1() {
           <p style={{ color: 'var(--text-secondary)', marginBottom: '2rem' }}>
             El jefe final de este módulo te está esperando. Tienes que sacar al menos un 80% para desbloquear la Misión 2.
           </p>
-          <button onClick={() => router.push('/module/1/quiz')} className="btn-primary" style={{ padding: '1rem 3rem', fontSize: '1.2rem', borderRadius: '30px' }}>
+          <button onClick={() => router.push(`/subjects/${subjectId}/module/1/quiz`)} className="btn-primary" style={{ padding: '1rem 3rem', fontSize: '1.2rem', borderRadius: '30px' }}>
             🎮 Iniciar Evaluación (Quiz)
           </button>
         </div>
