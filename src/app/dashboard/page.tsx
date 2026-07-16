@@ -52,14 +52,14 @@ export default function GlobalDashboard() {
             </button>
           </div>
 
-          <div className="glass-card" style={{ padding: '2rem' }}>
+          <div className="glass-card" style={{ padding: '2rem', border: '1px solid rgba(245, 158, 11, 0.3)' }}>
             <div style={{ fontSize: '3rem', marginBottom: '1rem' }}>🏛️</div>
             <h2 style={{ fontSize: '1.4rem' }}>Historia</h2>
             <p style={{ color: 'var(--text-secondary)', marginTop: '1rem', marginBottom: '2rem', minHeight: '60px' }}>
-              Explora los eventos que forjaron la humanidad. (Próximamente).
+              Poblamiento americano, el esplendor de Egipto y el Imperio Inca.
             </p>
-            <button onClick={() => router.push('/subjects/historia')} className="btn-secondary" style={{ width: '100%' }}>
-              Ver Temario
+            <button onClick={() => router.push('/subjects/historia')} className="btn-primary" style={{ width: '100%', background: 'linear-gradient(135deg, #f59e0b 0%, #d97706 100%)' }}>
+              Viajar en el Tiempo ⏳
             </button>
           </div>
 

@@ -1,150 +1,189 @@
 'use client';
-import { useState, useEffect } from 'react';
-import { useRouter, useParams } from 'next/navigation';
+import { useParams, useRouter } from 'next/navigation';
+import { useState } from 'react';
+import BiologiaQuiz from './BiologiaQuiz';
 
 const questions = [
-  // Seres Vivos
+  // Poblamiento
   {
-    q: '¿Qué diferencia fundamental tiene una célula eucariota respecto a una procariota?',
-    options: ['La eucariota es siempre unicelular.', 'La eucariota tiene un núcleo verdadero que envuelve y protege el ADN.', 'La procariota es exclusiva de los animales.', 'No hay ninguna diferencia real.'],
-    answer: 1
+    type: 'multiple',
+    q: "¿Qué teoría afirma que los humanos cruzaron un puente de hielo durante la glaciación persiguiendo grandes mamíferos?",
+    options: ["Teoría Oceánica", "Teoría Autóctona", "Teoría Asiática (Estrecho de Bering)", "Teoría Australiana"],
+    correct: 2
   },
   {
-    q: 'Un organismo compuesto por millones de células organizadas trabajando en equipo, como un árbol o un ser humano, es un organismo:',
-    options: ['Unicelular', 'Autótrofo obligado', 'Pluricelular', 'Procariota gigante'],
-    answer: 2
+    type: 'text',
+    q: "Explica brevemente la Teoría Oceánica propuesta por Paul Rivet.",
+    referenceAnswer: "Paul Rivet propuso que los humanos cruzaron el Océano Pacífico navegando en pequeñas balsas desde la Polinesia y Melanesia hasta llegar a América del Sur."
+  },
+  // Egipcios
+  {
+    type: 'multiple',
+    q: "¿Qué importancia tenía el Río Nilo para la civilización Egipcia?",
+    options: ["Era solo para bañarse.", "Era vital porque desbordaba cada año dejando un limo fértil que permitía cultivar trigo en medio del desierto.", "No era importante, ellos vivían en la selva.", "Servía para ahogar a los enemigos."],
+    correct: 1
   },
   {
-    q: 'Si una bacteria simplemente se divide por la mitad para crear un clon exacto de sí misma, está realizando:',
-    options: ['Nutrición autótrofa', 'Reproducción sexual (sexuada)', 'Función de relación', 'Reproducción asexual (asexuada)'],
-    answer: 3
+    type: 'text',
+    q: "Describe brevemente cómo estaba dividida la sociedad egipcia.",
+    referenceAnswer: "Tenía forma de pirámide. En la cima estaba el Faraón (considerado un Dios), luego nobles, sacerdotes y el Visir. Debajo escribas, médicos y artesanos. La gran mayoría eran campesinos, y en el fondo sin derechos estaban los esclavos."
   },
   {
-    q: 'A diferencia de las plantas, nosotros los humanos no podemos hacer fotosíntesis y debemos consumir alimentos de otros seres vivos. Nuestra nutrición es:',
-    options: ['Autótrofa', 'Unicelular', 'Heterótrofa', 'Quimiosintética'],
-    answer: 2
+    type: 'multiple',
+    q: "Los egipcios momificaban a sus muertos porque...",
+    options: ["Les gustaba el olor a especias.", "Creían que para vivir en el más allá después de la muerte, el cuerpo no debía pudrirse.", "Era una forma de castigar a los prisioneros.", "Querían asustar a los arqueólogos modernos."],
+    correct: 1
+  },
+  // Incas
+  {
+    type: 'multiple',
+    q: "El Imperio Inca (Tahuantinsuyo) fue el más grande de América del Sur. ¿Por dónde se extendía?",
+    options: ["Por la selva del Amazonas.", "A lo largo de la Cordillera de los Andes, abarcando 6 países actuales.", "Por las llanuras de la Pampa Argentina.", "Por las islas del Caribe."],
+    correct: 1
   },
   {
-    q: 'Si te pinchas con una espina y el dolor hace que retires la mano instantáneamente, acabas de utilizar la función vital de:',
-    options: ['Reproducción rápida', 'Relación (captar un estímulo y generar una respuesta)', 'Nutrición defensiva', 'Ciclo de vida'],
-    answer: 1
+    type: 'text',
+    q: "¿Según la leyenda de los Incas, quiénes eran Manco Cápac y Mama Ocllo y qué fundaron?",
+    referenceAnswer: "Eran los hijos enviados por el dios Sol (Inti). Salieron del Lago Titicaca con la misión de hundir una vara de oro en la tierra para fundar la gran ciudad de Cuzco."
   },
-  // Plantas
+  // Integración
   {
-    q: '¿Por qué muchos árboles de clima templado pierden sus hojas cuando se acerca el invierno?',
-    options: ['Para verse más estéticos.', 'Es una respuesta a la bajada de temperatura y luz, para ahorrar energía.', 'Porque se vuelven animales.', 'Para asustar a los herbívoros.'],
-    answer: 1
-  },
-  {
-    q: '¿Qué caracteriza a las plantas xerófitas (como los cactus)?',
-    options: ['Viven flotando en pantanos.', 'No tienen raíces.', 'Están adaptadas a climas secos, con raíces profundas y hojas transformadas en espinas.', 'Necesitan estar completamente sumergidas en agua.'],
-    answer: 2
+    type: 'multiple',
+    q: "Si comparamos la forma de gobierno de los egipcios con la de los incas, encontramos una similitud clave:",
+    options: ["Ambos eran democracias modernas.", "En ambas el líder (Faraón / Inca) era considerado un Dios viviente o hijo de los dioses (Teocracia).", "No tenían líderes, todos eran iguales.", "Eran gobernados por escribas."],
+    correct: 1
   },
   {
-    q: 'El crecimiento lento y permanente de las raíces profundizando en la tierra en busca de humedad se denomina:',
-    options: ['Hidrotropismo positivo', 'Fototropismo negativo', 'Estivación botánica', 'Sismonastia'],
-    answer: 0
+    type: 'multiple',
+    q: "Cronológicamente (en el tiempo), ¿qué afirmación es correcta?",
+    options: ["Los incas y egipcios vivieron exactamente en los mismos años.", "Los incas son de la Antigüedad (hace 5000 años) y los egipcios son del 1500 d.C.", "Los egipcios son una civilización muy antigua (3150 a.C.), mientras que los incas son más recientes (alrededor del 1400 d.C.).", "Los egipcios le enseñaron a los incas a hacer pirámides en un viaje en barco."],
+    correct: 2
   },
   {
-    q: 'Si tocas las hojas de una planta Mimosa y estas se pliegan rápidamente en segundos para protegerse, estamos viendo un ejemplo de:',
-    options: ['Geotropismo', 'Tigmotactismo (una nastia por contacto)', 'Hidrotropismo', 'Fotosíntesis nocturna'],
-    answer: 1
-  },
-  // Animales
-  {
-    q: 'Para adaptarse perfectamente al agua, los peces evolucionaron una estructura que extrae el oxígeno disuelto en el agua. Se llama:',
-    options: ['Vejiga natatoria', 'Aleta dorsal', 'Branquias', 'Pulmones acuáticos'],
-    answer: 2
-  },
-  {
-    q: '¿Qué órgano de los peces funciona como un globo interno de gas que les permite flotar y cambiar de profundidad sin gastar energía nadando?',
-    options: ['La aleta caudal', 'El plancton', 'Las branquias', 'La vejiga natatoria'],
-    answer: 3
-  },
-  {
-    q: 'Los tiburones y los delfines pueden nadar libremente venciendo las fuertes corrientes del mar, por lo que pertenecen al grupo ecológico del:',
-    options: ['Bentos', 'Plancton', 'Necton', 'Ectotermo marino'],
-    answer: 2
-  },
-  {
-    q: 'Organismos como los cangrejos y las estrellas de mar, que viven apoyados y arrastrándose exclusivamente en el lecho (fondo) marino, forman parte del:',
-    options: ['Bentos', 'Plancton', 'Necton', 'Endotermo'],
-    answer: 0
-  },
-  {
-    q: 'Las aves y los mamíferos necesitan comer mucha comida porque gastan esa energía en generar su propio calor corporal constante. Ellos son:',
-    options: ['Animales ectotérmicos', 'Animales endotérmicos', 'Organismos sésiles', 'Animales estivadores'],
-    answer: 1
-  },
-  {
-    q: 'Para sobrevivir a la extrema falta de agua y al calor sofocante del verano, algunos animales se entierran en el barro seco y entran en un sueño profundo. A esto se le llama:',
-    options: ['Hibernación', 'Migración', 'Tigmotactismo', 'Estivación'],
-    answer: 3
+    type: 'text',
+    q: "Tanto egipcios como incas adoraban a varios dioses relacionados con la naturaleza. ¿Cómo se le llama a la religión que cree en muchos dioses?",
+    referenceAnswer: "A las religiones que creen en muchos dioses distintos se las llama religiones politeístas."
   }
 ];
 
-export default function FinalExam() {
+export default function Module4QuizPage() {
+  const params = useParams();
+  
+  if (params.subjectId === 'historia') {
+    return <HistoriaQuiz />;
+  }
+
+  return <BiologiaQuiz />;
+}
+
+function HistoriaQuiz() {
   const router = useRouter();
   const params = useParams();
   const subjectId = params.subjectId;
+  
   const [currentQ, setCurrentQ] = useState(0);
   const [score, setScore] = useState(0);
   const [showResult, setShowResult] = useState(false);
+  
   const [selectedOpt, setSelectedOpt] = useState<number | null>(null);
+  const [textAnswer, setTextAnswer] = useState("");
+  const [isGrading, setIsGrading] = useState(false);
+  const [aiFeedback, setAiFeedback] = useState<{correct: boolean, feedback: string} | null>(null);
 
-  useEffect(() => {
-    const userId = localStorage.getItem('userId');
-    if (!userId) router.push('/');
-  }, [router]);
-
-  const handleAnswer = (index: number) => {
-    if (selectedOpt !== null) return;
+  const handleMultipleAnswer = (index: number) => {
+    if (selectedOpt !== null || isGrading) return;
     
     setSelectedOpt(index);
     let newScore = score;
-    if (index === questions[currentQ].answer) {
-      newScore += 1;
+    const isCorrect = index === questions[currentQ].correct;
+    
+    if (isCorrect) {
+      newScore = score + 1;
       setScore(newScore);
     }
 
+    setAiFeedback({
+      correct: isCorrect,
+      feedback: isCorrect ? "¡Correcto!" : "Incorrecto."
+    });
+
     setTimeout(() => {
-      if (currentQ < questions.length - 1) {
-        setCurrentQ(currentQ + 1);
-        setSelectedOpt(null);
-      } else {
-        setShowResult(true);
-        // Save progress to database
-        const userId = localStorage.getItem('userId');
-        const passed = newScore >= 12; // Requiere 12/15 para pasar el examen final
-        if (userId) {
-          fetch('/api/quiz/submit', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ userId, subjectId, moduleId: 4, score: newScore, passed })
-          }).catch(err => console.error("Error saving progress:", err));
-        }
+      advanceOrFinish(newScore);
+    }, 1500);
+  };
+
+  const handleTextAnswerSubmit = async () => {
+    if (!textAnswer.trim() || isGrading) return;
+    setIsGrading(true);
+
+    try {
+      const q = questions[currentQ];
+      const res = await fetch('/api/quiz/grade-ai', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          question: q.q,
+          answer: textAnswer,
+          referenceAnswer: q.referenceAnswer
+        })
+      });
+
+      const data = await res.json();
+      setAiFeedback(data);
+      
+      let newScore = score;
+      if (data.correct) {
+        newScore = score + 1;
+        setScore(newScore);
       }
-    }, 1000);
+
+      setTimeout(() => {
+        advanceOrFinish(newScore);
+      }, 4500);
+
+    } catch (error) {
+      console.error(error);
+      setIsGrading(false);
+    }
+  };
+
+  const advanceOrFinish = (finalScore: number) => {
+    if (currentQ < questions.length - 1) {
+      setCurrentQ(currentQ + 1);
+      setSelectedOpt(null);
+      setTextAnswer("");
+      setAiFeedback(null);
+      setIsGrading(false);
+    } else {
+      setShowResult(true);
+      const userId = localStorage.getItem('userId');
+      const passed = finalScore >= 8; // Requiere 8/10
+      if (userId) {
+        fetch('/api/quiz/submit', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ userId, subjectId, moduleId: 4, score: finalScore, passed })
+        }).catch(err => console.error("Error saving progress:", err));
+      }
+    }
   };
 
   if (showResult) {
-    const passed = score >= 12; // 80%
+    const passed = score >= 8;
     return (
-      <div className="container animate-fade-in" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
-        <div className="glass-card" style={{ padding: '3rem', textAlign: 'center', border: passed ? '2px solid #10b981' : '2px solid #ef4444' }}>
+      <div className="container animate-fade-in" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', height: '100vh' }}>
+        <div className="glass-card" style={{ padding: '3rem', textAlign: 'center', maxWidth: '600px', border: passed ? '2px solid #10b981' : '2px solid #ef4444' }}>
           <h1 style={{ fontSize: '3rem', marginBottom: '1rem' }}>{passed ? '🏆 ¡APROBADO!' : '💥 REPROBADO'}</h1>
-          <p style={{ fontSize: '1.2rem', color: 'var(--text-secondary)', marginBottom: '2rem' }}>
-            Tu puntaje: <span style={{ color: 'var(--accent-primary)', fontWeight: 'bold' }}>{score} de {questions.length}</span>
-          </p>
-          <p style={{ marginBottom: '2rem' }}>
+          <h2>Tu puntaje: {score} / 10</h2>
+          <p style={{ marginTop: '1rem', color: 'var(--text-secondary)' }}>
             {passed 
-              ? '¡Felicidades! Estás más que listo para arrasar en el Parcial de Biología. Eres un experto.' 
-              : 'Necesitas al menos 12 aciertos para aprobar este simulacro. Repasa bien la teoría y vuelve a intentarlo.'}
+              ? '¡Felicidades historiador! Has dominado las rutas migratorias, los faraones y los incas. Estás listo para el parcial real.' 
+              : 'Necesitas al menos 8 aciertos para aprobar el Examen Final. ¡Repasa la teoría y vuelve a intentarlo!'}
           </p>
           <div style={{ marginTop: '2rem', display: 'flex', gap: '1rem', justifyContent: 'center' }}>
-            {!passed && <button onClick={() => { setCurrentQ(0); setScore(0); setShowResult(false); setSelectedOpt(null); }} className="btn-primary">Reintentar Parcial</button>}
-            <button onClick={() => router.push(`/subjects/${subjectId}`)} className={passed ? "btn-primary" : "btn-secondary"} style={{ width: '100%' }}>
-              Volver a Biología
+            {!passed && <button onClick={() => { setCurrentQ(0); setScore(0); setShowResult(false); setSelectedOpt(null); setTextAnswer(""); setAiFeedback(null); setIsGrading(false); }} className="btn-primary">Reintentar Examen</button>}
+            <button onClick={() => router.push(`/subjects/${subjectId}`)} className={passed ? "btn-primary" : "btn-secondary"}>
+              Volver al Panel
             </button>
           </div>
         </div>
@@ -155,45 +194,93 @@ export default function FinalExam() {
   const q = questions[currentQ];
 
   return (
-    <div className="container animate-fade-in" style={{ display: 'flex', flexDirection: 'column', height: '100vh', padding: '2rem 1rem' }}>
-      <header style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '2rem' }}>
-        <h3 style={{ color: '#ef4444' }}>📝 POSIBLES PREGUNTAS DEL PARCIAL</h3>
-        <span style={{ color: 'var(--text-secondary)' }}>Pregunta {currentQ + 1} de {questions.length}</span>
-      </header>
+    <div className="container animate-fade-in" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', paddingTop: '4rem', paddingBottom: '4rem' }}>
+      <div style={{ width: '100%', maxWidth: '600px' }}>
+        <header style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '2rem' }}>
+          <span style={{ color: 'var(--text-secondary)' }}>Pregunta {currentQ + 1} de {questions.length}</span>
+          <span style={{ color: 'var(--accent-primary)', fontWeight: 'bold' }}>Puntaje: {score}</span>
+        </header>
 
-      <main style={{ flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
-        <div style={{ maxWidth: '600px', width: '100%' }}>
-          <h2 style={{ fontSize: '1.5rem', marginBottom: '2rem', textAlign: 'center' }}>{q.q}</h2>
+        <div className="glass-card" style={{ padding: '2rem' }}>
+          <h2 style={{ fontSize: '1.5rem', marginBottom: '2rem' }}>{q.q}</h2>
           
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-            {q.options.map((opt, i) => {
-              let btnClass = "btn-secondary";
-              if (selectedOpt !== null) {
-                if (i === q.answer) btnClass = "btn-primary"; // Muestra la correcta en verde
-                else if (i === selectedOpt) btnClass = "btn-secondary"; // La que eligió mal
-              }
+          {q.type === 'multiple' ? (
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+              {q.options?.map((opt, i) => {
+                const isSelected = selectedOpt === i;
+                const isCorrect = selectedOpt !== null && i === q.correct;
+                const isWrong = isSelected && i !== q.correct;
 
-              return (
+                let bg = 'rgba(255, 255, 255, 0.05)';
+                let border = '1px solid rgba(255, 255, 255, 0.1)';
+
+                if (selectedOpt !== null) {
+                  if (isCorrect) {
+                    bg = 'rgba(16, 185, 129, 0.2)'; 
+                    border = '1px solid #10b981';
+                  } else if (isWrong) {
+                    bg = 'rgba(239, 68, 68, 0.2)'; 
+                    border = '1px solid #ef4444';
+                  }
+                }
+
+                return (
+                  <button
+                    key={i}
+                    onClick={() => handleMultipleAnswer(i)}
+                    style={{
+                      padding: '1rem', textAlign: 'left', borderRadius: '10px',
+                      background: bg, border: border, color: '#fff',
+                      cursor: selectedOpt === null ? 'pointer' : 'default',
+                      transition: 'all 0.3s ease', fontSize: '1.1rem'
+                    }}
+                    disabled={selectedOpt !== null || isGrading}
+                  >
+                    {opt}
+                  </button>
+                );
+              })}
+            </div>
+          ) : (
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+              <p style={{ color: 'var(--text-secondary)', fontSize: '0.9rem' }}>Escribe tu respuesta con tus propias palabras:</p>
+              <textarea 
+                className="input-field" 
+                rows={4} 
+                value={textAnswer}
+                onChange={(e) => setTextAnswer(e.target.value)}
+                disabled={isGrading || aiFeedback !== null}
+                placeholder="Escribe aquí..."
+              />
+              {!aiFeedback && (
                 <button 
-                  key={i} 
-                  onClick={() => handleAnswer(i)}
-                  className={btnClass}
-                  style={{ 
-                    padding: '1rem', 
-                    fontSize: '1.1rem', 
-                    textAlign: 'left',
-                    background: selectedOpt !== null && i === selectedOpt && i !== q.answer ? 'rgba(239, 68, 68, 0.2)' : undefined,
-                    border: selectedOpt !== null && i === selectedOpt && i !== q.answer ? '1px solid #ef4444' : undefined
-                  }}
-                  disabled={selectedOpt !== null}
+                  onClick={handleTextAnswerSubmit} 
+                  className="btn-primary" 
+                  disabled={isGrading || !textAnswer.trim()}
                 >
-                  {opt}
+                  {isGrading ? 'Evaluando con Inteligencia Artificial... 🤖' : 'Enviar Respuesta'}
                 </button>
-              );
-            })}
-          </div>
+              )}
+            </div>
+          )}
+
+          {aiFeedback && q.type === 'text' && (
+            <div className="animate-fade-in" style={{ 
+              marginTop: '1.5rem', 
+              padding: '1rem', 
+              borderRadius: '10px',
+              background: aiFeedback.correct ? 'rgba(16, 185, 129, 0.1)' : 'rgba(239, 68, 68, 0.1)',
+              border: aiFeedback.correct ? '1px solid #10b981' : '1px solid #ef4444'
+            }}>
+              <h3 style={{ color: aiFeedback.correct ? '#10b981' : '#ef4444', marginBottom: '0.5rem' }}>
+                {aiFeedback.correct ? '✅ ¡Respuesta Correcta!' : '❌ Respuesta Incorrecta'}
+              </h3>
+              <p style={{ lineHeight: '1.5' }}>{aiFeedback.feedback}</p>
+            </div>
+          )}
+
         </div>
-      </main>
+      </div>
     </div>
   );
 }
