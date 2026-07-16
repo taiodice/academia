@@ -46,7 +46,7 @@ Devuelve EXCLUSIVAMENTE un objeto JSON válido con esta estructura:
 }
 `;
       const result = await model.generateContent(prompt);
-      text = (await result.response).text();
+      text = (await result.response).text().replace(/```json/gi, '').replace(/```/g, '').trim();
     } catch (modelError: any) {
       console.warn("gemini-flash-latest falló, intentando con gemini-pro-latest...", modelError?.message);
       const fallbackModel = genAI.getGenerativeModel({ model: 'gemini-pro-latest' });
