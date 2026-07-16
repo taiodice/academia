@@ -20,10 +20,13 @@ export async function POST(req: Request) {
       });
     }
 
-    const model = genAI.getGenerativeModel({ model: 'gemini-1.5-flash' });
+    const model = genAI.getGenerativeModel({ 
+      model: 'gemini-1.5-flash',
+      generationConfig: { responseMimeType: "application/json" }
+    });
 
     const prompt = `
-Eres un profesor de historia evaluando a un alumno de 1er año de secundaria (aprox 12 años).
+Eres un profesor de historia evaluando a un alumno de 1er año de secundaria.
 Tienes que corregir su respuesta a una pregunta de examen. Eres estricto pero muy amable y didáctico.
 
 Pregunta del examen: "${question}"
@@ -31,11 +34,11 @@ Respuesta esperada o de referencia: "${referenceAnswer}"
 Respuesta del alumno: "${answer}"
 
 Instrucciones:
-1. Analiza si la respuesta del alumno demuestra que entendió el concepto, aunque no use exactamente las mismas palabras que la referencia.
-2. Determina si la respuesta es CORRECTA (verdadero/falso). Si la respuesta es demasiado vaga o directamente incorrecta, es FALSO.
-3. Escribe una breve retroalimentación (feedback) de máximo 2 oraciones, hablándole directamente al alumno (ej: "¡Muy bien! Exactamente, los incas..."). Si se equivocó, explícale brevemente por qué.
+1. Analiza si la respuesta del alumno demuestra que entendió el concepto.
+2. Determina si la respuesta es CORRECTA (verdadero/falso). Si la respuesta es demasiado vaga o directamente incorrecta (como "${answer}"), es FALSO.
+3. Escribe una breve retroalimentación (feedback) de máximo 2 oraciones, hablándole directamente al alumno (ej: "¡Muy bien!..."). Si se equivocó, explícale brevemente por qué.
 
-Devuelve EXCLUSIVAMENTE un objeto JSON válido con esta estructura, sin texto adicional (ni markdown de bloque de código):
+Devuelve EXCLUSIVAMENTE un objeto JSON válido con esta estructura:
 {
   "correct": true o false,
   "feedback": "tu explicación aquí"
@@ -44,7 +47,7 @@ Devuelve EXCLUSIVAMENTE un objeto JSON válido con esta estructura, sin texto ad
 
     const result = await model.generateContent(prompt);
     const response = await result.response;
-    const text = response.text().replace(/```json/g, '').replace(/```/g, '').trim();
+    const text = response.text();
 
     const parsedResult = JSON.parse(text);
 
@@ -52,11 +55,11 @@ Devuelve EXCLUSIVAMENTE un objeto JSON válido con esta estructura, sin texto ad
       correct: parsedResult.correct,
       feedback: parsedResult.feedback
     });
-  } catch (error) {
-    console.error('Error en grade-ai:', error);
+  } catch (error: any) {
+    console.error('Error detallado en grade-ai:', error?.message || error);
     return NextResponse.json({
       correct: false,
-      feedback: "Hubo un error de conexión con mi cerebro artificial. Por favor, intenta de nuevo."
+      feedback: "Hubo un error de conexión con mi cerebro artificial. Por favor, revisa la consola del servidor (pm2 logs) para más detalles."
     });
   }
 }
