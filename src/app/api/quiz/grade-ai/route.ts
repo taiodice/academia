@@ -22,10 +22,7 @@ export async function POST(req: Request) {
 
     let text = "";
     try {
-      const model = genAI.getGenerativeModel({ 
-        model: 'gemini-flash-latest',
-        generationConfig: { responseMimeType: "application/json" }
-      });
+      const model = genAI.getGenerativeModel({ model: 'gemini-flash-latest' });
       const prompt = `
 Eres un profesor de historia evaluando a un alumno de 1er año de secundaria.
 Tienes que corregir su respuesta a una pregunta de examen. Eres estricto pero muy amable y didáctico.
@@ -39,14 +36,13 @@ Instrucciones:
 2. Determina si la respuesta es CORRECTA (verdadero/falso). Si la respuesta es demasiado vaga o directamente incorrecta (como "${answer}"), es FALSO.
 3. Escribe una breve retroalimentación (feedback) de máximo 2 oraciones, hablándole directamente al alumno. Si se equivocó, explícale brevemente por qué.
 
-Devuelve EXCLUSIVAMENTE un objeto JSON válido con esta estructura:
-{
-  "correct": true o false,
-  "feedback": "tu explicación aquí"
-}
+Devuelve tu respuesta EXACTAMENTE en este formato (sin comillas adicionales, sin formato markdown):
+
+CORRECTO: true
+FEEDBACK: tu explicación aquí
 `;
       const result = await model.generateContent(prompt);
-      text = (await result.response).text().replace(/```json/gi, '').replace(/```/g, '').trim();
+      text = (await result.response).text();
     } catch (modelError: any) {
       console.warn("gemini-flash-latest falló, intentando con gemini-pro-latest...", modelError?.message);
       const fallbackModel = genAI.getGenerativeModel({ model: 'gemini-pro-latest' });
@@ -63,25 +59,31 @@ Instrucciones:
 2. Determina si la respuesta es CORRECTA (verdadero/falso). Si la respuesta es demasiado vaga o directamente incorrecta (como "${answer}"), es FALSO.
 3. Escribe una breve retroalimentación (feedback) de máximo 2 oraciones, hablándole directamente al alumno. Si se equivocó, explícale brevemente por qué.
 
-Devuelve EXCLUSIVAMENTE un objeto JSON válido con esta estructura, sin bloques de código markdown:
-{
-  "correct": true o false,
-  "feedback": "tu explicación aquí"
-}
+Devuelve tu respuesta EXACTAMENTE en este formato (sin comillas adicionales, sin formato markdown):
+
+CORRECTO: true
+FEEDBACK: tu explicación aquí
 `;
       const result = await fallbackModel.generateContent(promptFallback);
-      text = (await result.response).text().replace(/```json/g, '').replace(/```/g, '').trim();
+      text = (await result.response).text();
     }
 
-    const parsedResult = JSON.parse(text);
+    const isCorrect = text.includes('CORRECTO: true') || text.includes('CORRECTO: True');
+    
+    let feedbackMatch = text.split(/FEEDBACK:/i);
+    let extractedFeedback = feedbackMatch.length > 1 ? feedbackMatch[1].trim() : text.trim();
+    // Limpiar comillas iniciales o finales si las agregó
+    if (extractedFeedback.startsWith('"') && extractedFeedback.endsWith('"')) {
+        extractedFeedback = extractedFeedback.slice(1, -1);
+    }
 
     return NextResponse.json({
-      correct: parsedResult.correct,
-      feedback: parsedResult.feedback
+      correct: isCorrect,
+      feedback: extractedFeedback
     });
   } catch (error: any) {
     console.error('Error detallado en grade-ai:', error?.message || error);
-    // FALLBACK DEFINITIVO: Si la API Key existe pero lanza 404 (error de Google Cloud) u otro error, no bloqueamos al alumno.
+    // FALLBACK DEFINITIVO: Si la API Key existe pero lanza 404 u otro error, no bloqueamos al alumno.
     return NextResponse.json({
       correct: true,
       feedback: "⚠️ MODO OFFLINE: El cerebro de Inteligencia Artificial tiene problemas de conexión con Google. Como eres un excelente alumno, ¡te daré el punto por esta vez! Avanza tranquilo."
