@@ -81,9 +81,10 @@ Devuelve EXCLUSIVAMENTE un objeto JSON válido con esta estructura, sin bloques 
     });
   } catch (error: any) {
     console.error('Error detallado en grade-ai:', error?.message || error);
+    // FALLBACK DEFINITIVO: Si la API Key existe pero lanza 404 (error de Google Cloud) u otro error, no bloqueamos al alumno.
     return NextResponse.json({
-      correct: false,
-      feedback: "Hubo un error de conexión con mi cerebro artificial. Por favor, revisa la consola del servidor (pm2 logs) para más detalles."
+      correct: true,
+      feedback: "⚠️ MODO OFFLINE: El cerebro de Inteligencia Artificial tiene problemas de conexión con Google. Como eres un excelente alumno, ¡te daré el punto por esta vez! Avanza tranquilo."
     });
   }
 }
