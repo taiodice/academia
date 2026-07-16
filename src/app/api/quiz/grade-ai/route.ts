@@ -20,12 +20,13 @@ export async function POST(req: Request) {
       });
     }
 
-    const model = genAI.getGenerativeModel({ 
-      model: 'gemini-1.5-flash',
-      generationConfig: { responseMimeType: "application/json" }
-    });
-
-    const prompt = `
+    let text = "";
+    try {
+      const model = genAI.getGenerativeModel({ 
+        model: 'gemini-1.5-flash',
+        generationConfig: { responseMimeType: "application/json" }
+      });
+      const prompt = `
 Eres un profesor de historia evaluando a un alumno de 1er año de secundaria.
 Tienes que corregir su respuesta a una pregunta de examen. Eres estricto pero muy amable y didáctico.
 
@@ -36,7 +37,7 @@ Respuesta del alumno: "${answer}"
 Instrucciones:
 1. Analiza si la respuesta del alumno demuestra que entendió el concepto.
 2. Determina si la respuesta es CORRECTA (verdadero/falso). Si la respuesta es demasiado vaga o directamente incorrecta (como "${answer}"), es FALSO.
-3. Escribe una breve retroalimentación (feedback) de máximo 2 oraciones, hablándole directamente al alumno (ej: "¡Muy bien!..."). Si se equivocó, explícale brevemente por qué.
+3. Escribe una breve retroalimentación (feedback) de máximo 2 oraciones, hablándole directamente al alumno. Si se equivocó, explícale brevemente por qué.
 
 Devuelve EXCLUSIVAMENTE un objeto JSON válido con esta estructura:
 {
@@ -44,10 +45,33 @@ Devuelve EXCLUSIVAMENTE un objeto JSON válido con esta estructura:
   "feedback": "tu explicación aquí"
 }
 `;
+      const result = await model.generateContent(prompt);
+      text = (await result.response).text();
+    } catch (modelError: any) {
+      console.warn("gemini-1.5-flash falló, intentando con gemini-pro...", modelError?.message);
+      const fallbackModel = genAI.getGenerativeModel({ model: 'gemini-pro' });
+      const promptFallback = `
+Eres un profesor de historia evaluando a un alumno de 1er año de secundaria.
+Tienes que corregir su respuesta a una pregunta de examen. Eres estricto pero muy amable y didáctico.
 
-    const result = await model.generateContent(prompt);
-    const response = await result.response;
-    const text = response.text();
+Pregunta del examen: "${question}"
+Respuesta esperada o de referencia: "${referenceAnswer}"
+Respuesta del alumno: "${answer}"
+
+Instrucciones:
+1. Analiza si la respuesta del alumno demuestra que entendió el concepto.
+2. Determina si la respuesta es CORRECTA (verdadero/falso). Si la respuesta es demasiado vaga o directamente incorrecta (como "${answer}"), es FALSO.
+3. Escribe una breve retroalimentación (feedback) de máximo 2 oraciones, hablándole directamente al alumno. Si se equivocó, explícale brevemente por qué.
+
+Devuelve EXCLUSIVAMENTE un objeto JSON válido con esta estructura, sin bloques de código markdown:
+{
+  "correct": true o false,
+  "feedback": "tu explicación aquí"
+}
+`;
+      const result = await fallbackModel.generateContent(promptFallback);
+      text = (await result.response).text().replace(/```json/g, '').replace(/```/g, '').trim();
+    }
 
     const parsedResult = JSON.parse(text);
 
