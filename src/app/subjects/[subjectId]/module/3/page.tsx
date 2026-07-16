@@ -35,6 +35,9 @@ function Historia() {
 
         <section className="glass-card" style={{ padding: '2rem', marginBottom: '2rem' }}>
           <h2>1. Tiempo y Ubicación Geográfica 🗺️</h2>
+          <div style={{ margin: '2rem 0', borderRadius: '15px', overflow: 'hidden', boxShadow: '0 4px 15px rgba(0,0,0,0.3)' }}>
+            <img src="/images/maps/inca.png" alt="Mapa del Imperio Inca en América del Sur" style={{ width: '100%', height: 'auto', display: 'block' }} />
+          </div>
           <p style={{ marginTop: '1rem', lineHeight: '1.6' }}>
             A diferencia de los egipcios, el Imperio Inca es mucho más reciente. Su etapa de mayor esplendor ocurrió entre los años <strong>1438 y 1533 d.C.</strong>, justo antes de la llegada de los conquistadores españoles.
           </p>

@@ -72,6 +72,9 @@ function Historia() {
 
         <section className="glass-card" style={{ padding: '2rem', marginBottom: '3rem' }}>
           <h2>3. Estudiando el Mapa 🧭</h2>
+          <div style={{ margin: '2rem 0', borderRadius: '15px', overflow: 'hidden', boxShadow: '0 4px 15px rgba(0,0,0,0.3)' }}>
+            <img src="/images/maps/poblamiento.png" alt="Mapa de Poblamiento Americano" style={{ width: '100%', height: 'auto', display: 'block' }} />
+          </div>
           <p style={{ marginTop: '1rem', lineHeight: '1.6' }}>
             Para entender estas rutas, es vital visualizar un mapa mundial o planisferio:
           </p>

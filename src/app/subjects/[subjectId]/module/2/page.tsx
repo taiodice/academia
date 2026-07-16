@@ -35,6 +35,9 @@ function Historia() {
 
         <section className="glass-card" style={{ padding: '2rem', marginBottom: '2rem' }}>
           <h2>1. Tiempo y Espacio: El Don del Nilo 💧</h2>
+          <div style={{ margin: '2rem 0', borderRadius: '15px', overflow: 'hidden', boxShadow: '0 4px 15px rgba(0,0,0,0.3)' }}>
+            <img src="/images/maps/egipto.png" alt="Mapa del Antiguo Egipto" style={{ width: '100%', height: 'auto', display: 'block' }} />
+          </div>
           <p style={{ marginTop: '1rem', lineHeight: '1.6' }}>
             La civilización egipcia se desarrolló hace más de 5.000 años (alrededor del 3150 a.C.) en el noreste de África. Todo Egipto es un enorme desierto, pero lograron sobrevivir gracias al <strong>Río Nilo</strong>.
           </p>
