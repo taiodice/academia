@@ -23,7 +23,7 @@ export async function POST(req: Request) {
     let text = "";
     try {
       const model = genAI.getGenerativeModel({ 
-        model: 'gemini-1.5-flash',
+        model: 'gemini-flash-latest',
         generationConfig: { responseMimeType: "application/json" }
       });
       const prompt = `
@@ -48,8 +48,8 @@ Devuelve EXCLUSIVAMENTE un objeto JSON válido con esta estructura:
       const result = await model.generateContent(prompt);
       text = (await result.response).text();
     } catch (modelError: any) {
-      console.warn("gemini-1.5-flash falló, intentando con gemini-pro...", modelError?.message);
-      const fallbackModel = genAI.getGenerativeModel({ model: 'gemini-pro' });
+      console.warn("gemini-flash-latest falló, intentando con gemini-pro-latest...", modelError?.message);
+      const fallbackModel = genAI.getGenerativeModel({ model: 'gemini-pro-latest' });
       const promptFallback = `
 Eres un profesor de historia evaluando a un alumno de 1er año de secundaria.
 Tienes que corregir su respuesta a una pregunta de examen. Eres estricto pero muy amable y didáctico.
